@@ -8,7 +8,7 @@ function echo_date {
 }
 
 case "$#" in
-    "0")
+    "0") 
         if [ -f $CONFIG_FILE ]; then
             source $CONFIG_FILE
             if [[ -z $ROUTEROS_USER ]] || [[ -z $ROUTEROS_HOST ]] || [[ -z $ROUTEROS_SSH_PORT ]] || [[ -z $ROUTEROS_PRIVATE_KEY ]] || [[ -z $DOMAIN ]]; then
@@ -19,14 +19,14 @@ case "$#" in
                 echo_date "ROUTEROS_SSH_PORT=$ROUTEROS_SSH_PORT"
                 echo_date "ROUTEROS_PRIVATE_KEY=$ROUTEROS_PRIVATE_KEY"
                 echo_date "DOMAIN=$DOMAIN"
-                exit
+                exit 
             fi
         else
             echo_date "Missing config file! Ensure that $CONFIG_FILE is configured."
             exit 1
         fi
     ;;
-    "6")
+    "6") 
         ROUTEROS_USER=$1
         ROUTEROS_HOST=$2
         ROUTEROS_SSH_PORT=$3
@@ -94,9 +94,9 @@ scp -q -P $ROUTEROS_SSH_PORT -i "$ROUTEROS_PRIVATE_KEY" "$KEY" "$ROUTEROS_USER"@
 echo_date ""
 echo_date "Importing..."
 echo_date " - /certificate import file-name=$DOMAIN.pem passphrase=\"\""
-$routeros /certificate import file-name=$DOMAIN.pem passphrase=\"\" || echo_date "Failed!"
+$routeros /certificate import file-name=$DOMAIN.pem passphrase=\"\" || echo_date "Failed!" 
 echo_date " - /certificate import file-name=$DOMAIN.pem passphrase=\"\""
-$routeros /certificate import file-name=$DOMAIN.key passphrase=\"\" || echo_date "Failed!"
+$routeros /certificate import file-name=$DOMAIN.key passphrase=\"\" || echo_date "Failed!" 
 
 echo_date ""
 echo_date "Setup Certificates..."
@@ -113,3 +113,4 @@ echo_date ""
 echo_date "Cleanup..."
 $routeros /file remove $DOMAIN.pem > /dev/null && echo_date " - $DOMAIN.pem removed!"
 $routeros /file remove $DOMAIN.key > /dev/null && echo_date " - $DOMAIN.key removed!"
+
