@@ -104,7 +104,7 @@ echo_date " - SSTP Server:  /interface sstp-server server set certificate=$DOMAI
 $routeros /interface sstp-server server set certificate=$DOMAIN.pem_0
 
 echo_date " - OpenVPN Server: /interface ovpn-server server set certificate==$DOMAIN.pem_0"
-$routeros /interface ovpn-server server set certificate==$DOMAIN.pem_0
+$routeros /interface ovpn-server server set certificate=$DOMAIN.pem_0
 
 echo_date " - WebUI Server: /ip service set www-ssl certificate=$DOMAIN.pem_0"
 $routeros /ip service set www-ssl certificate=$DOMAIN.pem_0
